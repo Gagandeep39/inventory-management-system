@@ -41,6 +41,9 @@ public class UserDetails {
   private LocalDate dob;
   @Column(length = 50)
   private String emailId;
+  @Column(length = 10)
+  private String phoneNo;
+  
   @OneToOne(mappedBy = "userDetails")
   private Address address;
 
