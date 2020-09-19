@@ -1,9 +1,9 @@
 /**
  * @author Gagandeep Singh
  * @email singh.gagandeep3911@gmail.com
- * @create date 2020-09-19 19:20:33
- * @modify date 2020-09-19 19:20:33
- * @desc Product properties
+ * @create date 2020-09-19 19:31:49
+ * @modify date 2020-09-19 19:31:49
+ * @desc Raw Material
  */
 package com.cg.inventorydatabaseservice.entity;
 
@@ -29,12 +29,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Product {
-
+public class RawMaterial {
   @Id
-  @SequenceGenerator(name = "product_id_sequence", initialValue = 100000, allocationSize = 1)
-  @GeneratedValue(generator = "product_id_sequence", strategy = GenerationType.SEQUENCE)
-  private Long productId;
+  @SequenceGenerator(name = "rawmaterial_id_sequence", initialValue = 100000, allocationSize = 1)
+  @GeneratedValue(generator = "rawmaterial_id_sequence", strategy = GenerationType.SEQUENCE)
+  private Long rawMaterialId;
   @Column(length = 20)
   private String materialName;
   @Column(length = 100)
@@ -43,6 +42,6 @@ public class Product {
   @Enumerated(EnumType.STRING)
   private MeasurementUnit quantityUnit;
   @ManyToOne
-  @JoinColumn(name = "warehouseId", referencedColumnName = "warehouseId", foreignKey = @ForeignKey(name = "FK_prod_warehouse_ID"))
+  @JoinColumn(name = "warehouseId", referencedColumnName = "warehouseId", foreignKey = @ForeignKey(name = "FK_raw_matr_warehouse_ID"))
   private Warehouse warehouse;
 }
