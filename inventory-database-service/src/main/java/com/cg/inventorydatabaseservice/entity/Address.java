@@ -39,7 +39,7 @@ public class Address {
   private String pincode;
   @MapsId
   @OneToOne
-  @JoinColumn(name = "user_details_id", foreignKey = @ForeignKey(name = "FK_Address_USER_ID"))
+  @JoinColumn(name = "address_id", foreignKey = @ForeignKey(name = "FK_Address_USER_ID"))
   private UserDetails userDetails;
 
 }
