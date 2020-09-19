@@ -7,7 +7,7 @@
  */
 package com.cg.inventorydatabaseservice.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,7 +38,7 @@ public class UserDetails {
   private String designation;
   @Enumerated(EnumType.STRING)
   private Gender gender;
-  private Date dob;
+  private LocalDate dob;
   @Column(length = 50)
   private String emailId;
   @OneToOne(mappedBy = "userDetails")
