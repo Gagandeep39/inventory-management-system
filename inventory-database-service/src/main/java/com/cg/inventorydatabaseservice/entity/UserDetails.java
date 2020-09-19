@@ -9,7 +9,6 @@ package com.cg.inventorydatabaseservice.entity;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -42,10 +41,10 @@ public class UserDetails {
   private Date dob;
   @Column(length = 50)
   private String emailId;
-  @Column(length = 100)
-  private String address;
+  @OneToOne(mappedBy = "userDetails")
+  private Address address;
 
-  @OneToOne(cascade = CascadeType.MERGE)
+  @OneToOne
   @JoinColumn(name = "userDetailsId", referencedColumnName = "userId", foreignKey = @ForeignKey(name = "FK_USER_ID"))
   @MapsId
   private User user;
