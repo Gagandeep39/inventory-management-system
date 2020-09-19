@@ -33,5 +33,7 @@ public class User {
   private String username;
   @Column(length = 20)
   private String password;
+  @Column(length = 10)
+  private String role = "User";
 
 }
