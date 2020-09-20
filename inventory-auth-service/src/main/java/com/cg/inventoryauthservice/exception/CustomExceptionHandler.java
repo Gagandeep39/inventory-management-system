@@ -7,6 +7,7 @@
  */
 package com.cg.inventoryauthservice.exception;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -36,6 +37,14 @@ public class CustomExceptionHandler {
         (error) -> ((FieldError) error).getField(), 
         (error) -> error.getDefaultMessage(), 
         (error, duplicateError) -> error)));
+  }
+
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  @ExceptionHandler(InvalidCredentialException.class)
+  public ResponseEntity<Map<String, String>> handleInvalidCredential(InvalidCredentialException ex) {
+    return ResponseEntity
+    .status(HttpStatus.BAD_REQUEST)
+    .body(Collections.singletonMap(ex.getErrorName(), ex.getErrorDescription()));
   }
 
   @ExceptionHandler
