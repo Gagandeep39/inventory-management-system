@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 public class Address {
   @Id
   @JsonIgnore
-  private Integer addressId;
+  private Long addressId;
   @Column(length = 25)
   @Size(min = 6, max = 20)
   private String city;
