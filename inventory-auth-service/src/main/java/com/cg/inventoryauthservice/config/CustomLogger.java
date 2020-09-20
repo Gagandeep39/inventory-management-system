@@ -32,7 +32,7 @@ public class CustomLogger {
     log.debug("Arguments: ");
     Object[] objects = point.getArgs();
     for (Object object : objects) {
-      System.out.println("->" + object);
+      log.debug("->" + object);
     }
   }
 
