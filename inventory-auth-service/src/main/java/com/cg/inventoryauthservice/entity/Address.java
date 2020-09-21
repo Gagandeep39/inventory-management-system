@@ -16,16 +16,19 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@ToString(exclude = "userDetails")
 public class Address {
   @Id
   @JsonIgnore
@@ -45,6 +48,7 @@ public class Address {
   @MapsId
   @OneToOne
   @JoinColumn(name = "address_id", foreignKey = @ForeignKey(name = "FK_Address_USER_ID"))
+  @JsonBackReference
   private UserDetails userDetails;
 
 }
