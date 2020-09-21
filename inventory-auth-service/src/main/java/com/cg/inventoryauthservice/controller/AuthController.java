@@ -18,6 +18,8 @@ import com.cg.inventoryauthservice.dto.RegisterRequest;
 import com.cg.inventoryauthservice.dto.UserDetailsDto;
 import com.cg.inventoryauthservice.service.AuthService;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,33 +38,34 @@ public class AuthController {
   private AuthService authService;
 
   @PostMapping("/login")
-  public Map<String, String> login(@Valid @RequestBody LoginRequest loginRequest) {
-    return authService.login(loginRequest);
+  public ResponseEntity<Map<String, String>> login(@Valid @RequestBody LoginRequest loginRequest) {
+    return ResponseEntity.status(HttpStatus.FOUND).body(authService.login(loginRequest));
   }
 
   @PostMapping("/register")
-  public Map<String, String> register(@Valid @RequestBody RegisterRequest registerRequest){
-    return authService.register(registerRequest);
+  public ResponseEntity<Map<String, String>> register(@Valid @RequestBody RegisterRequest registerRequest) {
+    return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(registerRequest));
   }
 
   @PutMapping("/credentials")
-  public Map<String, String> changePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest){
-    return authService.changePassword(changePasswordRequest);
+  public ResponseEntity<Map<String, String>> changePassword(
+      @Valid @RequestBody ChangePasswordRequest changePasswordRequest) {
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).body(authService.changePassword(changePasswordRequest));
   }
 
   @PutMapping("/update")
-  public Map<String, String> updateUser(@Valid @RequestBody UserDetailsDto userDetailsDto){
-    return authService.updateUser(userDetailsDto);
+  public ResponseEntity<Map<String, String>> updateUser(@Valid @RequestBody UserDetailsDto userDetailsDto) {
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).body(authService.updateUser(userDetailsDto));
   }
 
   @GetMapping
-  public List<UserDetailsDto> fetchAllUsers(){
-    return authService.fetchAllUsers();
+  public ResponseEntity<List<UserDetailsDto>> fetchAllUsers() {
+    return ResponseEntity.status(HttpStatus.OK).body(authService.fetchAllUsers());
   }
 
   @GetMapping("/{id}")
-  public UserDetailsDto fetchUserById(@PathVariable Long id){
-    return authService.fetchUserById(id);
+  public ResponseEntity<UserDetailsDto> fetchUserById(@PathVariable Long id) {
+    return ResponseEntity.status(HttpStatus.OK).body(authService.fetchUserById(id));
   }
 
 }
