@@ -9,6 +9,7 @@ package com.cg.inventoryauthservice.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -46,7 +47,7 @@ public class UserDetails {
   @Column(length = 10)
   private String phoneNo;
 
-  @OneToOne(mappedBy = "userDetails")
+  @OneToOne(mappedBy = "userDetails", cascade = CascadeType.ALL)
   private Address address;
 
   @OneToOne
