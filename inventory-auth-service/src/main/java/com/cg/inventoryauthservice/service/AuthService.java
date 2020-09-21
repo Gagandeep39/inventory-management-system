@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.cg.inventoryauthservice.dto.ChangePasswordRequest;
+import com.cg.inventoryauthservice.dto.ForgotPasswordRequest;
 import com.cg.inventoryauthservice.dto.LoginRequest;
 import com.cg.inventoryauthservice.dto.RegisterRequest;
 import com.cg.inventoryauthservice.dto.UpdateRequest;
@@ -30,4 +31,8 @@ public interface AuthService {
   UserDetailsDto fetchUserById(Long id);
 
   boolean checkIfUsernameExists(String username);
+
+  Map<String, String> fetchSecurityQuestionForUser(String username);
+
+  Map<String, String> validateAnswerAndUpdate(ForgotPasswordRequest forgotPasswordRequest);
 }

@@ -8,11 +8,13 @@
 package com.cg.inventoryauthservice.service.implementation;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.cg.inventoryauthservice.dto.ChangePasswordRequest;
+import com.cg.inventoryauthservice.dto.ForgotPasswordRequest;
 import com.cg.inventoryauthservice.dto.LoginRequest;
 import com.cg.inventoryauthservice.dto.RegisterRequest;
 import com.cg.inventoryauthservice.dto.UpdateRequest;
@@ -101,10 +103,34 @@ public class AuthServiceImpl implements AuthService {
   }
 
   @Override
+  @Transactional(readOnly = true)
   public boolean checkIfUsernameExists(String username) {
-    if(!userRepository.existsByUsername(username))
-      return false;
+    if (!userRepository.existsByUsername(username)) return false;
     else throw new InvalidCredentialException("username", "Username already exists");
+  }
+
+  @Override
+  @Transactional(readOnly = true)
+  public Map<String, String> fetchSecurityQuestionForUser(String username) {
+    HashMap<String, String> responseMap = new HashMap<>();
+    responseMap.put("username", username);
+    responseMap.put("securityQuestion", userDetailsRepository.findByUserUsername(username)
+      .orElseThrow(() -> new InvalidCredentialException("username", "User " + username + " doesn't exist"))
+      .getSecurityQuestion());
+    return responseMap;
+  }
+
+  @Override
+  public Map<String, String> validateAnswerAndUpdate(ForgotPasswordRequest forgotPasswordRequest) {
+    UserDetails userDetails = userDetailsRepository
+      .findByUserUsername(forgotPasswordRequest.getUsername())
+      .orElseThrow(() -> new InvalidCredentialException("username", "User " + forgotPasswordRequest.getUsername() + " doesn't exist"));
+    if(!userDetails.getSecurityAnswer().toLowerCase().equals(forgotPasswordRequest.getSecurityAnswer().toLowerCase()))
+      throw new InvalidCredentialException("securityAnswer", "Invalid Answer");
+    User user = userDetails.getUser();
+    user.setPassword(forgotPasswordRequest.getNewPassword());
+    userRepository.save(user);
+    return Collections.singletonMap("success", "Successfully Updated Password");
   }
 
 }

@@ -13,6 +13,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import com.cg.inventoryauthservice.dto.ChangePasswordRequest;
+import com.cg.inventoryauthservice.dto.ForgotPasswordRequest;
 import com.cg.inventoryauthservice.dto.LoginRequest;
 import com.cg.inventoryauthservice.dto.RegisterRequest;
 import com.cg.inventoryauthservice.dto.UpdateRequest;
@@ -67,6 +68,17 @@ public class AuthController {
   @GetMapping("/{id}")
   public ResponseEntity<UserDetailsDto> fetchUserById(@PathVariable Long id) {
     return ResponseEntity.status(HttpStatus.OK).body(authService.fetchUserById(id));
+  }
+
+  @GetMapping("/forgotpassword/{username}")
+  public ResponseEntity<Map<String, String>> forgotPassword(@PathVariable String username) {
+    return ResponseEntity.status(HttpStatus.FOUND).body(authService.fetchSecurityQuestionForUser(username));
+  }
+
+  @PutMapping("/forgotpassword")
+  public ResponseEntity<Map<String, String>> validateAnswerAndUpdatePassword(
+      @Valid @RequestBody ForgotPasswordRequest forgotPasswordRequest) {
+    return ResponseEntity.status(HttpStatus.CREATED).body(authService.validateAnswerAndUpdate(forgotPasswordRequest));
   }
 
 }
