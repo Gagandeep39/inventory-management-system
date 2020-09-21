@@ -23,13 +23,13 @@ public class ChangePasswordRequest {
 
   
   @NotBlank
-  @Size(min = 6, max = 20)
-  private String userId;
+  @Size(min = 5, max = 20)
+  private String username;
   @NotBlank
-  @Size(min = 6, max = 20)
+  @Size(min = 5, max = 20)
   private String oldPassword;
   @NotBlank
-  @Size(min = 6, max = 20)
+  @Size(min = 5, max = 20)
   private String newPassword;
   
 }

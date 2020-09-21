@@ -34,10 +34,10 @@ public class RegisterRequest {
   @Size(min = 5, max = 20)
   private String username;
   @NotBlank
-  @Size(min = 6, max = 20)
+  @Size(min = 5, max = 20)
   private String password;
   @NotBlank
-  @Size(min = 6, max = 20)
+  @Size(min = 5, max = 20)
   private String designation;
   @NotBlank
   @Pattern(regexp = "^(Male|Female)$", message = "Gender must be Male or Female")

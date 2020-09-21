@@ -31,7 +31,8 @@ public class UserDetailsDto {
   private Long userId;
   @Size(min = 5, max = 20)
   private String username;
-  @Size(min = 6, max = 20)
+  private String role;
+  @Size(min = 5, max = 20)
   private String designation;
   @Pattern(regexp = "^(Male|Female)$", message = "Gender must be Male or Female")
   private String gender;
