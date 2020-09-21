@@ -43,6 +43,12 @@ public class UserDetails {
   private String emailId;
   @Column(length = 10)
   private String phoneNo;
+
+  
+  @Column(length = 80)
+  private String securityQuestion;
+  @Column(length = 10)
+  private String securityAnswer;
   
   @OneToOne(mappedBy = "userDetails")
   private Address address;

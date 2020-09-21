@@ -47,6 +47,11 @@ public class UserDetails {
   @Column(length = 10)
   private String phoneNo;
 
+  @Column(length = 80)
+  private String securityQuestion;
+  @Column(length = 10)
+  private String securityAnswer;
+
   @OneToOne(mappedBy = "userDetails", cascade = CascadeType.ALL)
   private Address address;
 
