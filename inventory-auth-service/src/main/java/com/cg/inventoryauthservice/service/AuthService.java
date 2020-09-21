@@ -13,6 +13,7 @@ import java.util.Map;
 import com.cg.inventoryauthservice.dto.ChangePasswordRequest;
 import com.cg.inventoryauthservice.dto.LoginRequest;
 import com.cg.inventoryauthservice.dto.RegisterRequest;
+import com.cg.inventoryauthservice.dto.UpdateRequest;
 import com.cg.inventoryauthservice.dto.UserDetailsDto;
 
 public interface AuthService {
@@ -22,7 +23,7 @@ public interface AuthService {
 
   Map<String, String> changePassword(ChangePasswordRequest changePasswordRequest);
 
-  Map<String, String> updateUser(UserDetailsDto userDetailsDto);
+  Map<String, String> updateUser(UpdateRequest updateRequest);
 
   List<UserDetailsDto> fetchAllUsers();
 

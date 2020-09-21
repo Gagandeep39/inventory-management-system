@@ -8,6 +8,7 @@
 package com.cg.inventoryauthservice.helper;
 
 import com.cg.inventoryauthservice.dto.RegisterRequest;
+import com.cg.inventoryauthservice.dto.UpdateRequest;
 import com.cg.inventoryauthservice.dto.UserDetailsDto;
 import com.cg.inventoryauthservice.entity.Address;
 import com.cg.inventoryauthservice.entity.User;
@@ -24,6 +25,8 @@ public class UserDetailsMapper {
       .build();
     return UserDetails.builder()
       .user(user)
+      .securityQuestion("Default Question")
+      .securityAnswer("answer")
       .designation(registerRequest.getDesignation())
       .gender(Gender.valueOf(registerRequest.getGender()))
       .dob(registerRequest.getDob())
@@ -57,6 +60,22 @@ public class UserDetailsMapper {
       .designation(userDetailsDto.getDesignation())
       .dob(userDetailsDto.getDob())
       .emailId(userDetailsDto.getEmailId())
+      .build();
+  }
+
+  public static UserDetails updateRequestToUserDetails(UpdateRequest updateRequest) {
+    Address address = updateRequest.getAddress();
+    address.setAddressId(updateRequest.getUserId());
+    return UserDetails.builder()
+      .address(address)
+      .userDetailsId(updateRequest.getUserId())
+      .phoneNo(updateRequest.getPhoneNo())
+      .gender(Gender.valueOf(updateRequest.getGender()))
+      .designation(updateRequest.getDesignation())
+      .dob(updateRequest.getDob())
+      .emailId(updateRequest.getEmailId())
+      .securityQuestion(updateRequest.getSecurityQuestion())
+      .securityAnswer(updateRequest.getSecurityAnswer())
       .build();
   }
   

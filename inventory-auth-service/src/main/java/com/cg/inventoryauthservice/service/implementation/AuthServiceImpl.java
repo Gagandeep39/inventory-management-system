@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 import com.cg.inventoryauthservice.dto.ChangePasswordRequest;
 import com.cg.inventoryauthservice.dto.LoginRequest;
 import com.cg.inventoryauthservice.dto.RegisterRequest;
+import com.cg.inventoryauthservice.dto.UpdateRequest;
 import com.cg.inventoryauthservice.dto.UserDetailsDto;
 import com.cg.inventoryauthservice.entity.Address;
 import com.cg.inventoryauthservice.entity.User;
@@ -65,9 +66,10 @@ public class AuthServiceImpl implements AuthService {
   }
 
   @Override
-  public Map<String, String> updateUser(UserDetailsDto userDetailsDto) {
-    userDetailsRepository.saveAndFlush(UserDetailsMapper.dtoToUserDetails(userDetailsDto));
-    return Collections.singletonMap("success", "Successfully Updated user with ID: " + userDetailsDto.getUserId());
+  public Map<String, String> updateUser(UpdateRequest updateRequest) {
+    UserDetails userDetails = UserDetailsMapper.updateRequestToUserDetails(updateRequest);
+    userDetailsRepository.save(userDetails);
+    return Collections.singletonMap("success", "Successfully Updated user with ID: " + updateRequest.getUserId());
   }
 
   @Override
