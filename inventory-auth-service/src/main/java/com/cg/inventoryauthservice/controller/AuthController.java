@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import com.cg.inventoryauthservice.dto.ChangePasswordRequest;
 import com.cg.inventoryauthservice.dto.LoginRequest;
 import com.cg.inventoryauthservice.dto.RegisterRequest;
+import com.cg.inventoryauthservice.dto.UpdateRequest;
 import com.cg.inventoryauthservice.dto.UserDetailsDto;
 import com.cg.inventoryauthservice.service.AuthService;
 
@@ -50,12 +51,12 @@ public class AuthController {
   @PutMapping("/credentials")
   public ResponseEntity<Map<String, String>> changePassword(
       @Valid @RequestBody ChangePasswordRequest changePasswordRequest) {
-    return ResponseEntity.status(HttpStatus.NO_CONTENT).body(authService.changePassword(changePasswordRequest));
+    return ResponseEntity.status(HttpStatus.CREATED).body(authService.changePassword(changePasswordRequest));
   }
 
   @PutMapping("/update")
-  public ResponseEntity<Map<String, String>> updateUser(@Valid @RequestBody UserDetailsDto userDetailsDto) {
-    return ResponseEntity.status(HttpStatus.NO_CONTENT).body(authService.updateUser(userDetailsDto));
+  public ResponseEntity<Map<String, String>> updateUser(@Valid @RequestBody UpdateRequest updateRequest) {
+    return ResponseEntity.status(HttpStatus.CREATED).body(authService.updateUser(updateRequest));
   }
 
   @GetMapping
