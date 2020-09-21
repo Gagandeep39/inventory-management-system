@@ -49,20 +49,6 @@ public class UserDetailsMapper {
       .build();
   }
 
-  public static UserDetails dtoToUserDetails(UserDetailsDto userDetailsDto) {
-    Address address = userDetailsDto.getAddress();
-    address.setAddressId(userDetailsDto.getUserId());
-    return UserDetails.builder()
-      .address(address)
-      .userDetailsId(userDetailsDto.getUserId())
-      .phoneNo(userDetailsDto.getPhoneNo())
-      .gender(Gender.valueOf(userDetailsDto.getGender()))
-      .designation(userDetailsDto.getDesignation())
-      .dob(userDetailsDto.getDob())
-      .emailId(userDetailsDto.getEmailId())
-      .build();
-  }
-
   public static UserDetails updateRequestToUserDetails(UpdateRequest updateRequest) {
     Address address = updateRequest.getAddress();
     address.setAddressId(updateRequest.getUserId());
@@ -78,5 +64,5 @@ public class UserDetailsMapper {
       .securityAnswer(updateRequest.getSecurityAnswer())
       .build();
   }
-  
+
 }
