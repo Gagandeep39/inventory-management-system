@@ -39,9 +39,9 @@ import lombok.AllArgsConstructor;
 @Transactional
 public class AuthServiceImpl implements AuthService {
 
-  private UserDetailsRepository userDetailsRepository;
-  private AddressRepository addressRepository;
-  private UserRepository userRepository;
+  private final UserDetailsRepository userDetailsRepository;
+  private final AddressRepository addressRepository;
+  private final UserRepository userRepository;
 
   @Override
   public Map<String, String> login(LoginRequest loginRequest) {
@@ -69,8 +69,7 @@ public class AuthServiceImpl implements AuthService {
 
   @Override
   public Map<String, String> updateUser(UpdateRequest updateRequest) {
-    UserDetails userDetails = UserDetailsMapper.updateRequestToUserDetails(updateRequest);
-    userDetailsRepository.save(userDetails);
+    userDetailsRepository.save(UserDetailsMapper.updateRequestToUserDetails(updateRequest));
     return Collections.singletonMap("success", "Successfully Updated user with ID: " + updateRequest.getUserId());
   }
 
@@ -87,18 +86,18 @@ public class AuthServiceImpl implements AuthService {
   @Override
   @Transactional(readOnly = true)
   public UserDetailsDto fetchUserById(Long id) {
-    UserDetails userDetails =  userDetailsRepository
-      .findById(id)
-      .orElseThrow(() -> new InvalidCredentialException("userId", "ID " + id + " doesn't exist"));
-    return UserDetailsMapper.userDetailsToDto(userDetails);
+    return UserDetailsMapper.userDetailsToDto(
+      userDetailsRepository
+        .findById(id)
+        .orElseThrow(() -> new InvalidCredentialException("userId", "ID " + id + " doesn't exist"))
+    );
   }
 
   @Transactional(readOnly = true)
   public User findUserByCredentials(String username, String password) {
     User user = userRepository.findByUsername(username)
         .orElseThrow(() -> new InvalidCredentialException("username", "User " + username + " doesn't exist"));
-    if (!user.getPassword().equals(password))
-      throw new InvalidCredentialException("password", "Invalid Password");
+    if (!user.getPassword().equals(password)) throw new InvalidCredentialException("password", "Invalid Password");
     return user;
   }
 
