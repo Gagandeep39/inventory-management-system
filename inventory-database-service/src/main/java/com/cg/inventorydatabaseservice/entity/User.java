@@ -29,7 +29,7 @@ public class User {
   @GeneratedValue(generator = "user_id_sequence", strategy = GenerationType.SEQUENCE)
   private Long userId;
   
-  @Column(length = 20)
+  @Column(length = 20, unique = true)
   private String username;
   @Column(length = 20)
   private String password;
