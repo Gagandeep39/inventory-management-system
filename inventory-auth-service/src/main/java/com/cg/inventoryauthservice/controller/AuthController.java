@@ -41,7 +41,7 @@ public class AuthController {
 
   @PostMapping("/login")
   public ResponseEntity<Map<String, String>> login(@Valid @RequestBody LoginRequest loginRequest) {
-    return ResponseEntity.status(HttpStatus.FOUND).body(authService.login(loginRequest));
+    return ResponseEntity.status(HttpStatus.ACCEPTED).body(authService.login(loginRequest));
   }
 
   @PostMapping("/register")
@@ -72,7 +72,7 @@ public class AuthController {
 
   @GetMapping("/forgotpassword/{username}")
   public ResponseEntity<Map<String, String>> forgotPassword(@PathVariable String username) {
-    return ResponseEntity.status(HttpStatus.FOUND).body(authService.fetchSecurityQuestionForUser(username));
+    return ResponseEntity.status(HttpStatus.ACCEPTED).body(authService.fetchSecurityQuestionForUser(username));
   }
 
   @PutMapping("/forgotpassword")
