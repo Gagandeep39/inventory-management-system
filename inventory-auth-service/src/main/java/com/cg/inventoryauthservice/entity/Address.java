@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -35,15 +36,19 @@ public class Address {
   private Long addressId;
   @Column(length = 25)
   @Size(min = 6, max = 20)
+  @NotBlank
   private String city;
   @Column(length = 25)
   @Size(min = 6, max = 20)
+  @NotBlank
   private String state;
   @Column(length = 25)
   @Size(min = 6, max = 20)
+  @NotBlank
   private String area;
   @Size(min = 6, max = 6, message = "Must be 6 digits only")
   @Column(length = 6)
+  @NotBlank
   private String pincode;
   @MapsId
   @OneToOne
