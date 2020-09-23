@@ -37,9 +37,9 @@ jobs:
           java-version: 1.8
       - name: Run unit tests
         run: mvn test
-  test:
+  build:
     runs-on: ubuntu-latest
-    name: Running tests
+    name: Build Project
     needs: compile
     steps:
       - uses: actions/checkout@v2
