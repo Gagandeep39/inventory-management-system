@@ -67,8 +67,7 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          path: inventory-database-service
-          context: .
+          context: inventory-database-service
           file: ./Dockerfile
           platforms: linux/amd64,linux/arm64,linux/386
           push: true
