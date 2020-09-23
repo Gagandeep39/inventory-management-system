@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://${host}:3306/inventorydb
+    url: jdbc:mysql://localhost:3306/inventorydb
     username: admin
     password: 12345678
     # Enables execution of data-mysql.sql script
@@ -18,4 +18,3 @@ logging:
     ROOT: info
     # debug level for all use defined code logs
     com.cg: info
-host: gagandeep-sprint.cmdlxfdnrfju.ap-south-1.rds.amazonaws.com
