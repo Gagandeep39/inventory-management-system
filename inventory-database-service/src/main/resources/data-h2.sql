@@ -14,7 +14,7 @@ INSERT INTO user_details (user_details_id, designation, dob, email_id, gender, p
 INSERT INTO user_details (user_details_id, designation, dob, email_id, gender, phone_no, security_question, security_answer) VALUES (100005, 'Sales Team', '1999-01-19', 'sulekha@mail.com', 'Female', '7576788679', 'Default Question', 'answer');
 INSERT INTO user_details (user_details_id, designation, dob, email_id, gender, phone_no, security_question, security_answer) VALUES (100006, 'Sales Team', '1990-03-12', 'raghav@mail.com', 'Male', '9966553322', 'Default Question', 'answer');
 
--- Dummy data for Address
+-- Dummy data for Address 
 INSERT INTO address (address_id, area, city, pincode, state) VALUES (100001,'Union Street','Seattle','98106','Washington');
 INSERT INTO address (address_id, area, city, pincode, state) VALUES (100002,'Stonepot Road','Newark','07102','New Jersey');
 INSERT INTO address (address_id, area, city, pincode, state) VALUES (100003,'Adams Drive','Houston','77002','Texas');
