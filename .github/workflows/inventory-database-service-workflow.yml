@@ -37,7 +37,7 @@ jobs:
           java-version: 1.8
       - name: Run unit tests
         run: mvn test
-  build and deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     name: Build
     needs: compile
