@@ -31,7 +31,7 @@ public class User {
   
   @Column(length = 20, unique = true)
   private String username;
-  @Column(length = 20)
+  @Column(length = 60)
   private String password;
   @Column(length = 10)
   private String role = "User";
