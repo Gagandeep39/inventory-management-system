@@ -17,7 +17,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
-public class BeanConfiguration {
+public class SwaggerConfig {
 
   /**
    * @api http://localhost:8080/swagger-ui/index.html
