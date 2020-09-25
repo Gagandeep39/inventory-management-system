@@ -17,17 +17,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-  @Override
+	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests()
-      .antMatchers("/**")
-      .permitAll();
+		http.authorizeRequests()
+			.antMatchers("/**")
+			.permitAll();
 		http.csrf().disable();
 	}
 
-  @Bean
+	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-  
+
 }
