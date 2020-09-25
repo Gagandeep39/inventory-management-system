@@ -29,6 +29,7 @@ import com.cg.inventoryauthservice.repository.UserDetailsRepository;
 import com.cg.inventoryauthservice.repository.UserRepository;
 import com.cg.inventoryauthservice.service.AuthService;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -42,6 +43,7 @@ public class AuthServiceImpl implements AuthService {
   private final UserDetailsRepository userDetailsRepository;
   private final AddressRepository addressRepository;
   private final UserRepository userRepository;
+  private final PasswordEncoder passwordEncoder;
 
   @Override
   public Map<String, String> login(LoginRequest loginRequest) {
@@ -52,6 +54,7 @@ public class AuthServiceImpl implements AuthService {
   @Override
   public Map<String, String> register(RegisterRequest registerRequest) {
     checkIfUsernameExists(registerRequest.getUsername());
+    registerRequest.setPassword(encodePassword(registerRequest.getPassword()));
     UserDetails userDetails = userDetailsRepository.save(UserDetailsMapper.registerToUserDetails(registerRequest));
     Address address = registerRequest.getAddress();
     address.setUserDetails(userDetails);
@@ -62,7 +65,7 @@ public class AuthServiceImpl implements AuthService {
   @Override
   public Map<String, String> changePassword(ChangePasswordRequest changePasswordRequest) {
     User user = findUserByCredentials(changePasswordRequest.getUsername(), changePasswordRequest.getOldPassword());
-    user.setPassword(changePasswordRequest.getNewPassword());
+    user.setPassword(encodePassword(changePasswordRequest.getNewPassword()));
     userRepository.save(user);
     return Collections.singletonMap("success", "Successfully Updated Password");
   }
@@ -97,7 +100,7 @@ public class AuthServiceImpl implements AuthService {
   public User findUserByCredentials(String username, String password) {
     User user = userRepository.findByUsername(username)
         .orElseThrow(() -> new InvalidCredentialException("username", "User " + username + " doesn't exist"));
-    if (!user.getPassword().equals(password)) throw new InvalidCredentialException("password", "Invalid Password");
+    if (!passwordEncoder.matches(password, user.getPassword())) throw new InvalidCredentialException("password", "Invalid Password");
     return user;
   }
 
@@ -127,9 +130,13 @@ public class AuthServiceImpl implements AuthService {
     if(!userDetails.getSecurityAnswer().toLowerCase().equals(forgotPasswordRequest.getSecurityAnswer().toLowerCase()))
       throw new InvalidCredentialException("securityAnswer", "Invalid Answer");
     User user = userDetails.getUser();
-    user.setPassword(forgotPasswordRequest.getNewPassword());
+    user.setPassword(encodePassword(forgotPasswordRequest.getNewPassword()));
     userRepository.save(user);
     return Collections.singletonMap("success", "Successfully Updated Password");
+  }
+
+  private String encodePassword(String password) {
+    return passwordEncoder.encode(password);
   }
 
 }

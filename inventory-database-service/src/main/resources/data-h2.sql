@@ -1,10 +1,11 @@
 -- Dummy data for User Table
-INSERT INTO user (user_id, password, username, role) VALUES (100001,'123456', 'gagan', 'Admin');
-INSERT INTO user (user_id, password, username, role) VALUES (100002,'123456', 'palak', 'User');
-INSERT INTO user (user_id, password, username, role) VALUES (100003,'123456', 'pragya', 'User');
-INSERT INTO user (user_id, password, username, role) VALUES (100004,'123456', 'rushikesh', 'User');
-INSERT INTO user (user_id, password, username, role) VALUES (100005,'123456', 'sulekha', 'User');
-INSERT INTO user (user_id, password, username, role) VALUES (100006,'123456', 'raghav', 'User');
+-- Default password: 123456
+INSERT INTO user (user_id, password, username, role) VALUES (100001,'$2a$10$B4FvjVc2oXqDTFdGGZjT5urzHS6TSdzrQ7p/vFi1rUuZgjXR4.m5K', 'gagan', 'Admin');
+INSERT INTO user (user_id, password, username, role) VALUES (100002,'$2a$10$B4FvjVc2oXqDTFdGGZjT5urzHS6TSdzrQ7p/vFi1rUuZgjXR4.m5K', 'palak', 'User');
+INSERT INTO user (user_id, password, username, role) VALUES (100003,'$2a$10$B4FvjVc2oXqDTFdGGZjT5urzHS6TSdzrQ7p/vFi1rUuZgjXR4.m5K', 'pragya', 'User');
+INSERT INTO user (user_id, password, username, role) VALUES (100004,'$2a$10$B4FvjVc2oXqDTFdGGZjT5urzHS6TSdzrQ7p/vFi1rUuZgjXR4.m5K', 'rushikesh', 'User');
+INSERT INTO user (user_id, password, username, role) VALUES (100005,'$2a$10$B4FvjVc2oXqDTFdGGZjT5urzHS6TSdzrQ7p/vFi1rUuZgjXR4.m5K', 'sulekha', 'User');
+INSERT INTO user (user_id, password, username, role) VALUES (100006,'$2a$10$B4FvjVc2oXqDTFdGGZjT5urzHS6TSdzrQ7p/vFi1rUuZgjXR4.m5K', 'raghav', 'User');
 
 -- Dummy data for User detail
 INSERT INTO user_details (user_details_id, designation, dob, email_id, gender, phone_no, security_question, security_answer) VALUES (100001, 'Administrator', '1999-05-14', 'singh.gagandeep3911@gmail.com', 'Male', '8419969059', 'Default Question', 'answer');
