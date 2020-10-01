@@ -48,7 +48,12 @@ jobs:
         with:
           java-version: 1.8
       - name: Build
-        run: mvn clean package -DskipTests  
+        run: |
+          mkdir -p target/dependency
+          mvn package -DskipTests
+          cd target/dependency
+          jar -xf ../*.jar
+          cd ../..
       - name: Set env
         run: echo "::set-env name=NOW::v$(date +'%Y%m%d.%H%M%S')"
         # Required for Build and push step
